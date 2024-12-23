@@ -1,0 +1,22 @@
+# Environment variables
+.env
+
+# Maven
+target/
+dependency-reduced-pom.xml
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+.fake
