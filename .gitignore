@@ -1,8 +1,9 @@
 # Environment variables
 .env
 
-# Maven
+# Build artifacts
 target/
+dist/
 dependency-reduced-pom.xml
 
 # IDE files
