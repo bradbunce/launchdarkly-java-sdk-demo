@@ -12,6 +12,7 @@ import com.launchdarkly.sdk.server.interfaces.LDClientInterface;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -51,7 +52,7 @@ public class Form_1 extends JPanel {
         "Income", "Expense", "Profit", "Cost"
     };
     
-    private static final int[] PROGRESS_VALUES = {60, 70, 85};
+    private static final Random random = new Random();
     
     public Form_1() {
         try {
@@ -74,16 +75,16 @@ public class Form_1 extends JPanel {
     
     private void initializeProgressBars() {
         // Set initial properties for progress bars
-        progress1.setBackground(new Color(66, 246, 84));
-        progress1.setForeground(new Color(19, 153, 32));
+        progress1.setBackground(new Color(0, 0, 0));
+        progress1.setForeground(new Color(255, 63, 63));
         progress1.setValue(0);
         
-        progress2.setBackground(new Color(132, 66, 246));
-        progress2.setForeground(new Color(64, 18, 153));
+        progress2.setBackground(new Color(0, 0, 0));
+        progress2.setForeground(new Color(63, 255, 63));
         progress2.setValue(0);
         
-        progress3.setBackground(new Color(66, 193, 246));
-        progress3.setForeground(new Color(26, 132, 181));
+        progress3.setBackground(new Color(0, 0, 0));
+        progress3.setForeground(new Color(63, 63, 255));
         progress3.setValue(0);
     }
     
@@ -244,10 +245,10 @@ public class Form_1 extends JPanel {
                 progress2.start();
                 progress3.start();
                 
-                // Then set target values
-                progress1.setValue(PROGRESS_VALUES[0]);
-                progress2.setValue(PROGRESS_VALUES[1]);
-                progress3.setValue(PROGRESS_VALUES[2]);
+                // Then set random target values between 0 and 100
+                progress1.setValue(random.nextInt(101));
+                progress2.setValue(random.nextInt(101));
+                progress3.setValue(random.nextInt(101));
             } else {
                 // When disabling, just set to 0 (animation handled automatically)
                 progress1.setValue(0);
