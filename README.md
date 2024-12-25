@@ -1,6 +1,7 @@
 # LaunchDarkly Java SDK Demo
 
-A Java Swing application demonstrating feature flag functionality using the LaunchDarkly SDK.
+A Java Swing application demonstrating feature flag functionality using the LaunchDarkly Java SDK.
+
 
 ## Prerequisites
 
@@ -51,6 +52,7 @@ mvn clean package
 
 This will create `launchdarkly-java-demo.jar` in the `dist` directory.
 
+
 ## Running
 
 There are two ways to run the application:
@@ -72,6 +74,7 @@ The application demonstrates three feature flags:
 - `form-1-progress-meters` - Controls the visibility of progress meters
 - `form-1-line-chart` - Controls the line chart display
 - `form-1-chart` - Controls the main chart display
+- `form-1` - Keystone prerequisite flag for controlling the release of all 3 features at once
 
 ## Development
 
