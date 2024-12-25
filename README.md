@@ -38,10 +38,10 @@ This creates:
 - Project "LaunchDarkly Java Demo - {user_name}"
 - Production, test, and development environments
 - Feature flags with prerequisites:
-  - Form 1 (`form-1`)
-  - Form 1 Bar Chart (`form-1-bar-chart`)
-  - Form 1 Line Chart (`form-1-line-chart`)
-  - Form 1 Progress Meters (`form-1-progress-meters`)
+  - Form 1 (`dashboard`)
+  - Form 1 Bar Chart (`dashboard-bar-chart`)
+  - Form 1 Line Chart (`dashboard-line-chart`)
+  - Form 1 Progress Meters (`dashboard-progress-meters`)
 
 ## Building
 
@@ -71,10 +71,10 @@ There are two ways to run the application:
 
 The application demonstrates three feature flags:
 
-- `form-1-progress-meters` - Controls the visibility of progress meters
-- `form-1-line-chart` - Controls the line chart display
-- `form-1-chart` - Controls the main chart display
-- `form-1` - Keystone prerequisite flag for controlling the release of all 3 features at once
+- `dashboard-progress-meters` - Controls the visibility of progress meters
+- `dashboard-line-chart` - Controls the line chart display
+- `dashboard-chart` - Controls the main chart display
+- `dashboard` - Keystone prerequisite flag for controlling the release of all 3 features at once
 
 ## Development
 

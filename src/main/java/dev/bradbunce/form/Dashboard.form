@@ -38,7 +38,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="com.launchdarkly.swing.RoundPanel" name="roundPanel1">
+    <Container class="dev.bradbunce.swing.RoundPanel" name="roundPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
@@ -113,7 +113,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="com.launchdarkly.swing.progress.Progress" name="progress1">
+            <Component class="dev.bradbunce.swing.progress.Progress" name="progress1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="54" green="f6" red="42" type="rgb"/>
@@ -185,7 +185,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="com.launchdarkly.swing.progress.Progress" name="progress2">
+            <Component class="dev.bradbunce.swing.progress.Progress" name="progress2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f6" green="42" red="84" type="rgb"/>
@@ -241,7 +241,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="com.launchdarkly.swing.progress.Progress" name="progress3">
+            <Component class="dev.bradbunce.swing.progress.Progress" name="progress3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f6" green="c1" red="42" type="rgb"/>
@@ -268,7 +268,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="com.launchdarkly.swing.RoundPanel" name="roundPanel2">
+    <Container class="dev.bradbunce.swing.RoundPanel" name="roundPanel2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
@@ -296,11 +296,11 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="com.launchdarkly.chart.Chart" name="chart">
+        <Component class="dev.bradbunce.chart.Chart" name="chart">
         </Component>
       </SubComponents>
     </Container>
-    <Container class="com.launchdarkly.swing.RoundPanel" name="roundPanel3">
+    <Container class="dev.bradbunce.swing.RoundPanel" name="roundPanel3">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
@@ -328,7 +328,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="com.launchdarkly.chart.LineChart" name="lineChart">
+        <Component class="dev.bradbunce.chart.LineChart" name="lineChart">
         </Component>
       </SubComponents>
     </Container>

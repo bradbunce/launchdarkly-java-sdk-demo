@@ -13,9 +13,9 @@ public class LD {
     private static String SDK_KEY = "";
     
     // Feature flag keys
-    public static final String FEATURE_FLAG_1_KEY = "form-1-progress-meters";
-    public static final String FEATURE_FLAG_2_KEY = "form-1-line-chart";
-    public static final String FEATURE_FLAG_3_KEY = "form-1-bar-chart";
+    public static final String FEATURE_FLAG_1_KEY = "dashboard-progress-meters";
+    public static final String FEATURE_FLAG_2_KEY = "dashboard-line-chart";
+    public static final String FEATURE_FLAG_3_KEY = "dashboard-bar-chart";
     
     static {
         // Try to load SDK key from environment or .env file

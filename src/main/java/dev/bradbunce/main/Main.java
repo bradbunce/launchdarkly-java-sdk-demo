@@ -3,7 +3,7 @@ package dev.bradbunce.main;
 import dev.bradbunce.config.LD;
 import dev.bradbunce.event.EventMenu;
 import dev.bradbunce.form.Form;
-import dev.bradbunce.form.Form_1;
+import dev.bradbunce.form.Dashboard;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -16,7 +16,7 @@ import javax.swing.plaf.ColorUIResource;
 
 public class Main extends javax.swing.JFrame {
     
-    private Form_1 form1;  // Cache Form_1 instance
+    private Dashboard dashboard;  // Cache Dashboard instance
     
     private static void exit(int status) {
         System.exit(status);
@@ -144,8 +144,8 @@ public class Main extends javax.swing.JFrame {
             ((javax.swing.JComponent)getRootPane()).setOpaque(true);
         }
         
-        // Create Form_1 instance
-        form1 = new Form_1();
+        // Create Dashboard instance
+        dashboard = new Dashboard();
         
         LD.showMessage("Setting up event menu");
         EventMenu event = new EventMenu() {
@@ -153,7 +153,7 @@ public class Main extends javax.swing.JFrame {
             public void selected(int index) {
                 LD.showMessage("Menu item " + index + " selected");
                 if (index == 0) {
-                    showForm(form1);  // Reuse Form_1 instance
+                    showForm(dashboard);  // Reuse Dashboard instance
                 } else if (index == 8) {
                     LD.showMessage("Logout has been clicked");
                     exit(0);
@@ -164,7 +164,7 @@ public class Main extends javax.swing.JFrame {
         };
         menu1.initMenu(event);
         
-        LD.showMessage("About to show initial Form_1");
+        LD.showMessage("About to show initial Dashboard");
         SwingUtilities.invokeLater(() -> {
             // Set background for all container components
             setBackground(bgColor);
@@ -187,7 +187,7 @@ public class Main extends javax.swing.JFrame {
                 ((JComponent)getRootPane()).setOpaque(true);
             }
             
-            showForm(form1);  // Show initial Form_1
+            showForm(dashboard);  // Show initial Dashboard
             
             // Initialize window completely before showing
             pack();

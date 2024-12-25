@@ -41,23 +41,23 @@ resource "launchdarkly_project" "demo" {
   }
 }
 
-resource "launchdarkly_feature_flag" "form_1" {
+resource "launchdarkly_feature_flag" "dashboard" {
   project_key = launchdarkly_project.demo.key
-  key         = "form-1"
-  name        = "Form 1"
-  description = "Form 1 base flag"
+  key         = "dashboard"
+  name        = "Dashboard"
+  description = "Dashboard base flag"
   temporary   = false
   
   variation_type = "boolean"
   variations {
     value       = true
     name        = "True"
-    description = "Flag is enabled"
+    description = "Dashboard is enabled"
   }
   variations {
     value       = false
     name        = "False"
-    description = "Flag is disabled"
+    description = "Dashboard is disabled"
   }
 
   defaults {
@@ -71,23 +71,23 @@ resource "launchdarkly_feature_flag" "form_1" {
   }
 }
 
-resource "launchdarkly_feature_flag" "form_1_bar_chart" {
+resource "launchdarkly_feature_flag" "dashboard_bar_chart" {
   project_key = launchdarkly_project.demo.key
-  key         = "form-1-bar-chart"
-  name        = "Form 1 Bar Chart"
-  description = "Form 1 bar chart component"
+  key         = "dashboard-bar-chart"
+  name        = "Dashboard Bar Chart"
+  description = "Dashboard bar chart component"
   temporary   = false
   
   variation_type = "boolean"
   variations {
     value       = true
     name        = "True"
-    description = "Chart is visible"
+    description = "Bar chart is visible"
   }
   variations {
     value       = false
     name        = "False"
-    description = "Chart is hidden"
+    description = "Bar chart is hidden"
   }
 
   defaults {
@@ -101,23 +101,23 @@ resource "launchdarkly_feature_flag" "form_1_bar_chart" {
   }
 }
 
-resource "launchdarkly_feature_flag" "form_1_line_chart" {
+resource "launchdarkly_feature_flag" "dashboard_line_chart" {
   project_key = launchdarkly_project.demo.key
-  key         = "form-1-line-chart"
-  name        = "Form 1 Line Chart"
-  description = "Form 1 line chart component"
+  key         = "dashboard-line-chart"
+  name        = "Dashboard Line Chart"
+  description = "Dashboard line chart component"
   temporary   = false
   
   variation_type = "boolean"
   variations {
     value       = true
     name        = "True"
-    description = "Chart is visible"
+    description = "Line chart is visible"
   }
   variations {
     value       = false
     name        = "False"
-    description = "Chart is hidden"
+    description = "Line chart is hidden"
   }
 
   defaults {
@@ -131,23 +131,23 @@ resource "launchdarkly_feature_flag" "form_1_line_chart" {
   }
 }
 
-resource "launchdarkly_feature_flag" "form_1_progress_meters" {
+resource "launchdarkly_feature_flag" "dashboard_progress_meters" {
   project_key = launchdarkly_project.demo.key
-  key         = "form-1-progress-meters"
-  name        = "Form 1 Progress Meters"
-  description = "Form 1 progress meters component"
+  key         = "dashboard-progress-meters"
+  name        = "Dashboard Progress Meters"
+  description = "Dashboard progress meters component"
   temporary   = false
   
   variation_type = "boolean"
   variations {
     value       = true
     name        = "True"
-    description = "Meters are visible"
+    description = "Progress meters are visible"
   }
   variations {
     value       = false
     name        = "False"
-    description = "Meters are hidden"
+    description = "Progress meters are hidden"
   }
 
   defaults {
@@ -162,18 +162,29 @@ resource "launchdarkly_feature_flag" "form_1_progress_meters" {
 }
 
 resource "null_resource" "add_prerequisites" {
+  triggers = {
+    project_key = launchdarkly_project.demo.key
+    flags = join(",", [
+      launchdarkly_feature_flag.dashboard.key,
+      launchdarkly_feature_flag.dashboard_bar_chart.key,
+      launchdarkly_feature_flag.dashboard_line_chart.key,
+      launchdarkly_feature_flag.dashboard_progress_meters.key
+    ])
+  }
+
   depends_on = [
-    launchdarkly_feature_flag.form_1,
-    launchdarkly_feature_flag.form_1_bar_chart,
-    launchdarkly_feature_flag.form_1_line_chart,
-    launchdarkly_feature_flag.form_1_progress_meters
+    launchdarkly_feature_flag.dashboard,
+    launchdarkly_feature_flag.dashboard_bar_chart,
+    launchdarkly_feature_flag.dashboard_line_chart,
+    launchdarkly_feature_flag.dashboard_progress_meters
   ]
 
   provisioner "local-exec" {
     command = <<EOT
     # Add prerequisites
-    for flag in form-1-bar-chart form-1-line-chart form-1-progress-meters; do
+    for flag in dashboard-bar-chart dashboard-line-chart dashboard-progress-meters; do
       for env in production test development; do
+        echo "Setting prerequisite for $flag in $env environment..."
         curl -X PATCH \
           -H "Authorization: ${var.launchdarkly_access_token}" \
           -H "Content-Type: application/json" \
@@ -183,7 +194,7 @@ resource "null_resource" "add_prerequisites" {
               "op": "add",
               "path": "/environments/'$env'/prerequisites/-",
               "value": {
-                "key": "form-1",
+                "key": "dashboard",
                 "variation": 0
               }
             }]

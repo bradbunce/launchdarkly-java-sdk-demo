@@ -21,7 +21,7 @@ import dev.bradbunce.chart.LineChart;
 import dev.bradbunce.swing.progress.Progress;
 import dev.bradbunce.swing.RoundPanel;
 
-public class Form_1 extends JPanel {
+public class Dashboard extends JPanel {
     
     // Constants for chart data
     private static final double[][] ACTIVE_DATA = {
@@ -54,9 +54,9 @@ public class Form_1 extends JPanel {
     
     private static final Random random = new Random();
     
-    public Form_1() {
+    public Dashboard() {
         try {
-            LD.showMessage("Form_1 constructor called");
+            LD.showMessage("Dashboard constructor called");
             initComponents();
             setOpaque(false);
             
@@ -68,7 +68,7 @@ public class Form_1 extends JPanel {
             init();
             LD.showMessage("init() completed");
         } catch (Exception e) {
-            LD.showMessage("Error in Form_1 constructor: " + e.getMessage());
+            LD.showMessage("Error in Dashboard constructor: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -90,7 +90,7 @@ public class Form_1 extends JPanel {
     
     private void init() {
         try {
-            LD.showMessage("Form_1 init() started");
+            LD.showMessage("Dashboard init() started");
             
             // Get the client and context from LD class
             LDClient client = LD.getClient();
