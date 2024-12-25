@@ -21,3 +21,10 @@ dependency-reduced-pom.xml
 *.log
 
 .fake
+
+# Terraform
+*.tfvars
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
