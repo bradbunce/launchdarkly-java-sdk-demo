@@ -6,11 +6,15 @@ import io.github.cdimascio.dotenv.Dotenv;
 import java.io.File;
 
 public class LD {
-    private static String userEmail;
-    private static String userName;
+    private static String userEmail = "";
+    private static String userName = "";
     private static LDContext context;
     private static LDClient client;
     private static String SDK_KEY = "";
+
+    // Default values from .env
+    private static String defaultEmail = "";
+    private static String defaultName = "";
     
     // Feature flag keys
     public static final String FEATURE_FLAG_1_KEY = "dashboard-progress-meters";
@@ -18,17 +22,27 @@ public class LD {
     public static final String FEATURE_FLAG_3_KEY = "dashboard-bar-chart";
     
     static {
-        // Try to load SDK key from environment or .env file
-        loadSdkKey();
+        // Try to load values from environment or .env file
+        loadEnvValues();
     }
     
-    private static void loadSdkKey() {
-        // First try system environment variable
+    private static void loadEnvValues() {
+        // First try system environment variables
         String key = System.getenv("LAUNCHDARKLY_SDK_KEY");
+        String email = System.getenv("LAUNCHDARKLY_USER_EMAIL");
+        String name = System.getenv("LAUNCHDARKLY_USER_NAME");
+        
         if (key != null && !key.isEmpty()) {
             showMessage("Found SDK key in environment variables");
             SDK_KEY = key;
-            return;
+        }
+        if (email != null && !email.isEmpty()) {
+            showMessage("Found user email in environment variables");
+            defaultEmail = email;
+        }
+        if (name != null && !name.isEmpty()) {
+            showMessage("Found user name in environment variables");
+            defaultName = name;
         }
         
         // Try loading from .env file in project root
@@ -42,29 +56,61 @@ public class LD {
                     .ignoreIfMissing()
                     .load();
                 
-                key = dotenv.get("LAUNCHDARKLY_SDK_KEY");
-                if (key != null && !key.isEmpty()) {
-                    showMessage("Found SDK key in .env file");
-                    SDK_KEY = key;
-                    return;
+                // Only override if not already set from environment variables
+                if (SDK_KEY.isEmpty()) {
+                    key = dotenv.get("LAUNCHDARKLY_SDK_KEY");
+                    if (key != null && !key.isEmpty()) {
+                        showMessage("Found SDK key in .env file");
+                        SDK_KEY = key;
+                    }
+                }
+                
+                if (defaultEmail.isEmpty()) {
+                    email = dotenv.get("LAUNCHDARKLY_USER_EMAIL");
+                    if (email != null && !email.isEmpty()) {
+                        showMessage("Found user email in .env file");
+                        defaultEmail = email;
+                    }
+                }
+                
+                if (defaultName.isEmpty()) {
+                    name = dotenv.get("LAUNCHDARKLY_USER_NAME");
+                    if (name != null && !name.isEmpty()) {
+                        showMessage("Found user name in .env file");
+                        defaultName = name;
+                    }
                 }
             }
         } catch (Exception e) {
             showMessage("Warning: Failed to load .env file: " + e.getMessage());
         }
         
-        showMessage("No SDK key found in environment or .env file");
+        if (SDK_KEY.isEmpty()) {
+            showMessage("No SDK key found in environment or .env file");
+        }
     }
     
     public static String getSdkKey() {
         return SDK_KEY;
     }
     
+    public static String getDefaultEmail() {
+        return defaultEmail;
+    }
+    
+    public static String getDefaultName() {
+        return defaultName;
+    }
+    
     public static void initialize(String sdkKey, String email, String name) throws Exception {
+        // Use provided values or fall back to defaults from .env
+        String finalSdkKey = (sdkKey != null && !sdkKey.isEmpty()) ? sdkKey : SDK_KEY;
+        String finalEmail = (email != null && !email.isEmpty()) ? email : defaultEmail;
+        String finalName = (name != null && !name.isEmpty()) ? name : defaultName;
         try {
-            SDK_KEY = sdkKey;
-            userEmail = email;
-            userName = name;
+            SDK_KEY = finalSdkKey;
+            userEmail = finalEmail;
+            userName = finalName;
             
             showMessage("Creating context for user: " + userName + " with email: " + userEmail);
             

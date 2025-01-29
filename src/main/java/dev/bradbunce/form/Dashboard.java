@@ -23,29 +23,19 @@ import dev.bradbunce.swing.RoundPanel;
 
 public class Dashboard extends JPanel {
     
-    // Constants for chart data
-    private static final double[][] ACTIVE_DATA = {
-        {500, 200, 80, 89},
-        {600, 750, 90, 150},
-        {200, 350, 460, 900},
-        {480, 150, 750, 700},
-        {350, 540, 300, 150},
-        {190, 280, 81, 200}
-    };
-    
     private static final String[] MONTHS = {
         "January", "February", "March", "April", "May", "June"
     };
     
     private static final Color[] CHART_COLORS = {
-        new Color(12, 84, 175),   // Income primary
-        new Color(0, 108, 247),   // Income secondary
-        new Color(54, 4, 143),    // Expense primary
-        new Color(104, 49, 200),  // Expense secondary
-        new Color(5, 125, 0),     // Profit primary
-        new Color(95, 209, 69),   // Profit secondary
-        new Color(186, 37, 37),   // Cost primary
-        new Color(241, 100, 120)  // Cost secondary
+        new Color(255, 0, 0),   // Income primary
+        new Color(255, 127, 127),   // Income secondary
+        new Color(0, 0, 255),    // Expense primary
+        new Color(127, 127, 255),  // Expense secondary
+        new Color(0, 255, 0),     // Profit primary
+        new Color(127, 255, 127),   // Profit secondary
+        new Color(255, 255, 0),   // Cost primary
+        new Color(255, 255, 127)  // Cost secondary
     };
     
     private static final String[] LEGEND_LABELS = {
@@ -76,15 +66,15 @@ public class Dashboard extends JPanel {
     private void initializeProgressBars() {
         // Set initial properties for progress bars
         progress1.setBackground(new Color(0, 0, 0));
-        progress1.setForeground(new Color(255, 63, 63));
+        progress1.setForeground(new Color(255, 31, 31));
         progress1.setValue(0);
         
         progress2.setBackground(new Color(0, 0, 0));
-        progress2.setForeground(new Color(63, 255, 63));
+        progress2.setForeground(new Color(31, 255, 31));
         progress2.setValue(0);
         
         progress3.setBackground(new Color(0, 0, 0));
-        progress3.setForeground(new Color(63, 63, 255));
+        progress3.setForeground(new Color(31, 31, 255));
         progress3.setValue(0);
     }
     
@@ -192,8 +182,15 @@ public class Dashboard extends JPanel {
             // Create and update data
             List<ModelChart> data = new ArrayList<>();
             for (int i = 0; i < MONTHS.length; i++) {
-                ModelChart model = new ModelChart(MONTHS[i], 
-                    showData ? ACTIVE_DATA[i] : new double[]{0, 0, 0, 0});
+                double[] values = showData ? 
+                    new double[]{
+                        random.nextInt(1001),
+                        random.nextInt(1001),
+                        random.nextInt(1001),
+                        random.nextInt(1001)
+                    } : 
+                    new double[]{0, 0, 0, 0};
+                ModelChart model = new ModelChart(MONTHS[i], values);
                 data.add(model);
             }
             targetChart.updateData(data);
@@ -217,8 +214,15 @@ public class Dashboard extends JPanel {
             // Create and update data
             List<ModelChart> data = new ArrayList<>();
             for (int i = 0; i < MONTHS.length; i++) {
-                ModelChart model = new ModelChart(MONTHS[i], 
-                    showData ? ACTIVE_DATA[i] : new double[]{0, 0, 0, 0});
+                double[] values = showData ? 
+                    new double[]{
+                        random.nextInt(1001),
+                        random.nextInt(1001),
+                        random.nextInt(1001),
+                        random.nextInt(1001)
+                    } : 
+                    new double[]{0, 0, 0, 0};
+                ModelChart model = new ModelChart(MONTHS[i], values);
                 data.add(model);
             }
             targetChart.updateData(data);

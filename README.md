@@ -14,16 +14,18 @@ A Java Swing application demonstrating feature flag functionality using the Laun
 ## Setup
 
 1. Clone the repository
-2. Copy `.env.example` to `.env` and add your LaunchDarkly SDK key:
+2. Copy `.env.example` to `.env` and add your LaunchDarkly SDK key, e-mail and name:
    ```
    LAUNCHDARKLY_SDK_KEY=your-sdk-key
+   LAUNCHDARKLY_USER_EMAIL=your-email@example.com
+   LAUNCHDARKLY_USER_NAME="Your Name"
    ```
 
 ### Feature Flag Setup with Terraform
 
 1. Create `terraform.tfvars`:
    ```hcl
-   user_name = "your-name"
+   user_name = "your-user-name"
    launchdarkly_access_token = "api-key-here"
    ```
 

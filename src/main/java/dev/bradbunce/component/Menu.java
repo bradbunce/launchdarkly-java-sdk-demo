@@ -28,7 +28,7 @@ public class Menu extends javax.swing.JPanel {
     public void initMenu(EventMenu event) {
         this.event = event;
         addMenu(new ImageIcon(getClass().getResource("/dev/bradbunce/icon/1.png")), "Dashboard", 0);
-        addMenu(new ImageIcon(getClass().getResource("/dev/bradbunce/icon/2.png")), "Application", 1);
+        addMenu(new ImageIcon(getClass().getResource("/dev/bradbunce/icon/2.png")), "Weather", 1);
         addMenu(new ImageIcon(getClass().getResource("/dev/bradbunce/icon/3.png")), "Staff", 2);
         addMenu(new ImageIcon(getClass().getResource("/dev/bradbunce/icon/4.png")), "Report", 3);
         addMenu(new ImageIcon(getClass().getResource("/dev/bradbunce/icon/5.png")), "Note", 4);

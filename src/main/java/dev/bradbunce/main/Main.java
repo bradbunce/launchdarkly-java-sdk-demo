@@ -4,6 +4,7 @@ import dev.bradbunce.config.LD;
 import dev.bradbunce.event.EventMenu;
 import dev.bradbunce.form.Form;
 import dev.bradbunce.form.Dashboard;
+import dev.bradbunce.form.Weather;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -30,17 +31,30 @@ public class Main extends javax.swing.JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 4, 4, 4);
         
-        // Get pre-filled SDK key
+        // Get pre-filled values
         String prefilledKey = LD.getSdkKey();
+        String prefilledEmail = LD.getDefaultEmail();
+        String prefilledName = LD.getDefaultName();
+        
         LD.showMessage("Pre-filled SDK key: " + (prefilledKey != null && !prefilledKey.isEmpty() ? "Found" : "Not found"));
+        LD.showMessage("Pre-filled email: " + (prefilledEmail != null && !prefilledEmail.isEmpty() ? "Found" : "Not found"));
+        LD.showMessage("Pre-filled name: " + (prefilledName != null && !prefilledName.isEmpty() ? "Found" : "Not found"));
         
         // Create text fields
         JTextField sdkKeyField = new JTextField(20);
+        JTextField emailField = new JTextField(20);
+        JTextField nameField = new JTextField(20);
+        
+        // Pre-fill fields with values from .env if available
         if (prefilledKey != null && !prefilledKey.isEmpty()) {
             sdkKeyField.setText(prefilledKey);
         }
-        JTextField emailField = new JTextField(20);
-        JTextField nameField = new JTextField(20);
+        if (prefilledEmail != null && !prefilledEmail.isEmpty()) {
+            emailField.setText(prefilledEmail);
+        }
+        if (prefilledName != null && !prefilledName.isEmpty()) {
+            nameField.setText(prefilledName);
+        }
         
         // Add components to panel
         panel.add(new JLabel("Please enter your LaunchDarkly SDK key:"), gbc);
@@ -154,6 +168,8 @@ public class Main extends javax.swing.JFrame {
                 LD.showMessage("Menu item " + index + " selected");
                 if (index == 0) {
                     showForm(dashboard);  // Reuse Dashboard instance
+                } else if (index == 1) {
+                    showForm(new Weather());  // Show Weather form
                 } else if (index == 8) {
                     LD.showMessage("Logout has been clicked");
                     exit(0);
